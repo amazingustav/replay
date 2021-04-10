@@ -1,13 +1,11 @@
-rootProject.name="micronaut-hexagonal-quickstart"
+rootProject.name="replay-micronaut"
 
 include("main", "domain")
 
 // Input
-include("rest", "kafka-consumer")
+include("rest")
 project(":rest").projectDir = file("input/rest")
-project(":kafka-consumer").projectDir = file("input/kafka-consumer")
 
 // Secondary
-include("mysql", "kafka-producer")
+include("mysql")
 project(":mysql").projectDir = file("output/mysql")
-project(":kafka-producer").projectDir = file("output/kafka-producer")

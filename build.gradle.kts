@@ -33,7 +33,7 @@ allprojects {
 }
 
 subprojects {
-    group = "com.quickstart"
+    group = "br.com.amz"
     version = "0.1"
 
     sourceSets {

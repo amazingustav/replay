@@ -1,13 +1,13 @@
 micronaut:
   application:
-    name: micronautHexagonalQuickstart
+    name: replayMicronaut
   server:
     port: 8087
 
 jpa:
   default:
     packages-to-scan:
-      - 'com.quickstart'
+      - 'br.com.amz'
     properties:
       hibernate:
         hbm2ddl:
@@ -18,9 +18,9 @@ r2dbc:
     default:
       schema-generate: CREATE
       dialect: MYSQL
-      url: r2dbc:mysql://${MYSQL_HOST:localhost}:${MYSQL_PORT:3311}/${MYSQL_NAME:mhq_db}
-      username: mhq_user
-      password: mhq_pwd
+      url: r2dbc:mysql://${MYSQL_HOST:localhost}:${MYSQL_PORT:3311}/${MYSQL_NAME:replay}
+      username: r_user
+      password: r_pwd
   migrate:
     dialect: mysql
     resources-paths:
@@ -29,24 +29,7 @@ flyway:
   datasources:
     default:
       enabled: true
-      url: jdbc:mysql://${MYSQL_HOST:localhost}:${MYSQL_PORT:3311}/${MYSQL_NAME:mhq_db}
-      username: mhq_user
-      password: mhq_pwd
+      url: jdbc:mysql://${MYSQL_HOST:localhost}:${MYSQL_PORT:3311}/${MYSQL_NAME:replay}
+      username: r_user
+      password: r_pwd
       locations: classpath:/*.sql
-kafka:
-  bootstrap:
-    servers: localhost:9092
-  schema:
-    registry:
-      url: http://localhost:8081
-      schema-versions: 1000
-  producers:
-    default:
-      key-serializer: org.apache.kafka.common.serialization.UUIDSerializer
-      value-serializer: io.confluent.kafka.serializers.json.KafkaJsonSchemaSerializer
-  #      value-serializer: io.confluent.kafka.streams.serdes.avro.SpecificAvroSerializer
-  consumers:
-    default:
-      value-deserializer: io.confluent.kafka.serializers.json.KafkaJsonSchemaDeserializer
-      key-deserializer: org.apache.kafka.common.serialization.UUIDDeserializer
-#      value.deserializer: io.confluent.kafka.streams.serdes.avro.SpecificAvroDeserializer

@@ -1,5 +1,5 @@
 applicationType: default
-defaultPackage: com.quickstart
+defaultPackage: br.com.amz.replay
 testFramework: kotest
 sourceLanguage: kotlin
 buildTool: gradle_kotlin

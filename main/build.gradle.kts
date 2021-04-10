@@ -6,12 +6,12 @@ plugins {
 kapt {
     arguments {
         arg("micronaut.processing.incremental", true)
-        arg("micronaut.processing.annotations", "com.quickstart.*,io.quickstart.*")
+        arg("micronaut.processing.annotations", "br.com.amz.*,io.amz.*")
     }
 }
 
 application {
-    mainClass.set("com.quickstart.Application")
+    mainClass.set("br.com.amz.replay.Application")
 
     applicationDefaultJvmArgs = listOf(
         "-server",
@@ -28,13 +28,13 @@ micronaut {
 
     processing {
         incremental(true)
-        annotations("com.quickstart.*")
+        annotations("br.com.amz.*")
     }
 }
 
 tasks {
     jar {
-        archiveBaseName.set("micronaut-hexagonal-quickstart")
+        archiveBaseName.set("replay-micronaut")
         archiveVersion.set("")
 
         manifest {
@@ -51,12 +51,10 @@ tasks {
     }
 }
 
-val kafkaJsonSerializer = project.properties["kafkaJsonSerializer"]
-val micronautKafka = project.properties["micronautKafka"]
 val micronautVersion = project.properties["micronautVersion"]
 
-val inputProjects = listOf(":rest", ":kafka-consumer")
-val outputProjects = listOf(":mysql", ":kafka-producer")
+val inputProjects = listOf(":rest")
+val outputProjects = listOf(":mysql")
 val projects = listOf(":domain") + inputProjects + outputProjects
 
 dependencies {
@@ -69,8 +67,4 @@ dependencies {
     implementation("io.micronaut:micronaut-runtime")
 
     kaptTest("io.micronaut:micronaut-bom:${micronautVersion}")
-
-    testImplementation("io.micronaut.kafka:micronaut-kafka")
-    testImplementation("io.confluent:kafka-json-serializer:${kafkaJsonSerializer}")
-    testImplementation("io.confluent:kafka-json-schema-serializer:${kafkaJsonSerializer}")
 }
