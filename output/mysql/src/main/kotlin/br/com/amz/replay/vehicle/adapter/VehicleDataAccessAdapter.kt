@@ -8,6 +8,8 @@ import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.flow.toList
 import kotlinx.coroutines.reactive.asFlow
 import kotlinx.coroutines.reactive.awaitSingle
+import kotlinx.coroutines.reactive.awaitSingleOrNull
+import java.util.UUID
 import javax.inject.Singleton
 
 @Singleton
@@ -21,10 +23,15 @@ internal class VehicleDataAccessAdapter(
     }
 
     override suspend fun findAll(): List<Vehicle> = coroutineScope {
-        vehicleRepository
-            .findAll()
+        vehicleRepository.findAll()
             .asFlow()
             .toList()
             .map { it.toModel() }
+    }
+
+    override suspend fun findById(id: UUID) = coroutineScope {
+        vehicleRepository.findById(id.toString())
+            .awaitSingleOrNull()
+            ?.toModel()
     }
 }

@@ -9,14 +9,14 @@ import javax.persistence.Id
 @MappedEntity("vehicle")
 internal data class VehicleDBO(
     @Id
-    val id: String,
+    val id: UUID,
     val make: String,
     val model: String,
     val year: Short,
     val milesAmount: Int
 ) {
     fun toModel() = Vehicle(
-        id = UUID.fromString(id),
+        id = id,
         make = make,
         model = model,
         year = year,
@@ -25,7 +25,7 @@ internal data class VehicleDBO(
 }
 
 internal fun Vehicle.toDBO() = VehicleDBO(
-    id = id?.toString() ?: randomUUID().toString(),
+    id = id ?: randomUUID(),
     make = make,
     model = model,
     year = year,

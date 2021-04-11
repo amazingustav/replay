@@ -8,13 +8,13 @@ import javax.persistence.Id
 @MappedEntity("offer")
 internal data class OfferDBO(
     @Id
-    val id: String,
+    val id: UUID,
     val annualPercentageRate: Double,
     val monthlyPaymentAmount: Double,
     val paymentAmount: Int
 ) {
     fun toModel() = Offer(
-        id = UUID.fromString(id),
+        id = id,
         annualPercentageRate = annualPercentageRate,
         monthlyPaymentAmount = monthlyPaymentAmount,
         paymentAmount = paymentAmount
@@ -22,7 +22,7 @@ internal data class OfferDBO(
 }
 
 internal fun Offer.toDBO() = OfferDBO(
-    id = id?.toString() ?: randomUUID().toString(),
+    id = id ?: randomUUID(),
     annualPercentageRate = annualPercentageRate,
     monthlyPaymentAmount = monthlyPaymentAmount,
     paymentAmount = paymentAmount

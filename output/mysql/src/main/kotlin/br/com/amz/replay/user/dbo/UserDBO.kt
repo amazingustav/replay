@@ -8,19 +8,19 @@ import javax.persistence.Id
 @MappedEntity("user")
 internal data class UserDBO(
     @Id
-    val id: String,
+    val id: UUID,
     val name: String,
     val email: String
 ) {
     fun toModel() = User(
-        id = UUID.fromString(id),
+        id = id,
         name = name,
         email = email
     )
 }
 
 internal fun User.toDBO() = UserDBO(
-    id = id?.toString() ?: randomUUID().toString(),
+    id = id ?: randomUUID(),
     name = name,
     email = email
 )
