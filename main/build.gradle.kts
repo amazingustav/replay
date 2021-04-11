@@ -58,8 +58,7 @@ val outputProjects = listOf(":mysql")
 val projects = listOf(":domain") + inputProjects + outputProjects
 
 dependencies {
-    projects.map { projects -> project(projects) }
-        .forEach { projectDependency -> implementation(projectDependency) }
+    projects.map { project(it) }.forEach { implementation(it) }
 
     kapt("io.micronaut:micronaut-bom:${micronautVersion}")
     implementation(platform("io.micronaut:micronaut-bom:${micronautVersion}"))

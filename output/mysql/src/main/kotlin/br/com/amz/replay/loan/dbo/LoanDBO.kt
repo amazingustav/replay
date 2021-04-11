@@ -16,17 +16,26 @@ internal data class LoanDBO(
     @Id
     val id: UUID,
     val user: UserDBO,
-    val vehicle: VehicleDBO
+    val vehicle: VehicleDBO,
+    val lenderName: String,
+    val paidAmount: Int,
+    val balance: Double
 ): DBO() {
     fun toModel() = LoanOutput(
         id = id,
         user = user.toModel(),
-        vehicle = vehicle.toModel()
+        vehicle = vehicle.toModel(),
+        lenderName = lenderName,
+        paidAmount = paidAmount,
+        balance = balance
     )
 }
 
 internal fun LoanOutput.toDBO() = LoanDBO(
     id = id ?: randomUUID(),
     user = user.toDBO(),
-    vehicle = vehicle.toDBO()
+    vehicle = vehicle.toDBO(),
+    lenderName = lenderName,
+    paidAmount = paidAmount,
+    balance = balance
 )

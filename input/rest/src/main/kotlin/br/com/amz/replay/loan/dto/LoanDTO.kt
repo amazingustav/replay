@@ -11,19 +11,31 @@ import java.util.UUID
 data class LoanInputDTO (
     val userId: UUID,
     val vehicleId: UUID,
+    val lenderName: String,
+    val paidAmount: Int,
+    val balance: Double
 ) {
     fun toModelInput() = LoanInput(
         userId = userId,
-        vehicleId = vehicleId
+        vehicleId = vehicleId,
+        lenderName = lenderName,
+        paidAmount = paidAmount,
+        balance = balance
     )
 }
 
 data class LoanOutputDTO (
     val user: UserDTO,
-    val vehicle: VehicleDTO
+    val vehicle: VehicleDTO,
+    val lenderName: String,
+    val paidAmount: Int,
+    val balance: Double
 )
 
 fun LoanOutput.toDTO() = LoanOutputDTO(
     user = user.toDTO(),
-    vehicle = vehicle.toDTO()
+    vehicle = vehicle.toDTO(),
+    lenderName = lenderName,
+    paidAmount = paidAmount,
+    balance = balance
 )

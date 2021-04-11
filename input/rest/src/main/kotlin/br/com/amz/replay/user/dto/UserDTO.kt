@@ -3,16 +3,13 @@ package br.com.amz.replay.user.dto
 import br.com.amz.replay.user.model.User
 
 data class UserDTO (
-    val name: String,
-    val email: String
+    val name: String
 ) {
     fun toModel() = User(
-        name = name,
-        email = email
+        name = name
     )
 }
 
 fun User.toDTO() = UserDTO(
-    name = name,
-    email = email
+    name = name
 )

@@ -4,7 +4,9 @@ import io.micronaut.test.extensions.kotest.annotation.MicronautTest
 import io.kotest.core.spec.style.StringSpec
 
 @MicronautTest
-class MicronautQuickstartTest(private val application: EmbeddedApplication<*>): StringSpec({
+class MicronautQuickstartTest(
+    private val application: EmbeddedApplication<*>
+): StringSpec({
 
     "test the server is running" {
         assert(application.isRunning)

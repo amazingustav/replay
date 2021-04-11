@@ -1,8 +1,8 @@
 package br.com.amz.replay.loan.usecase
 
 import br.com.amz.replay.exception.ResourceNotFoundException
-import br.com.amz.replay.loan.model.LoanOutput
 import br.com.amz.replay.loan.model.LoanInput
+import br.com.amz.replay.loan.model.LoanOutput
 import br.com.amz.replay.loan.ports.input.LoanInputPort
 import br.com.amz.replay.loan.ports.output.LoanDataAccessPort
 import br.com.amz.replay.user.ports.output.UserDataAccessPort
@@ -28,7 +28,10 @@ class LoanUseCase(
 
         val loan = LoanOutput(
             user = user,
-            vehicle = vehicle
+            vehicle = vehicle,
+            lenderName = loanInput.lenderName,
+            paidAmount = loanInput.paidAmount,
+            balance = loanInput.balance
         )
 
         loanDataAccessPort.save(loan).also {

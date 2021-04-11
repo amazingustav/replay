@@ -1,3 +1,7 @@
+plugins {
+    id("org.flywaydb.flyway") version "7.7.3"
+}
+
 dependencies {
     implementation(project(":domain"))
 
@@ -8,4 +12,11 @@ dependencies {
 
     runtimeOnly("mysql:mysql-connector-java")
     runtimeOnly("dev.miku:r2dbc-mysql")
+}
+
+flyway {
+    url = "jdbc:mysql://localhost:3311/replay"
+    user = "r_user"
+    password = "r_pwd"
+    schemas = arrayOf("replay")
 }

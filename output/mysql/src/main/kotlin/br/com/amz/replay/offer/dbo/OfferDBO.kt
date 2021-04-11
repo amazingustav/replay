@@ -1,8 +1,9 @@
 package br.com.amz.replay.offer.dbo
+
 import br.com.amz.replay.DBO
-import br.com.amz.replay.loan.dbo.LoanDBO
-import br.com.amz.replay.loan.dbo.toDBO
 import br.com.amz.replay.offer.model.Offer
+import br.com.amz.replay.user.dbo.UserDBO
+import br.com.amz.replay.user.dbo.toDBO
 import io.micronaut.data.annotation.MappedEntity
 import java.util.UUID
 import java.util.UUID.randomUUID
@@ -14,19 +15,15 @@ internal data class OfferDBO(
     val id: UUID,
     val annualPercentageRate: Double,
     val monthlyPaymentAmount: Double,
-    val loan: LoanDBO,
-    val lenderName: String,
+    val user: UserDBO,
     val paymentAmount: Int,
-    val paidAmount: Int
 ): DBO() {
     fun toModel() = Offer(
         id = id,
         annualPercentageRate = annualPercentageRate,
         monthlyPaymentAmount = monthlyPaymentAmount,
-        loan = loan.toModel(),
-        lenderName = lenderName,
+        user = user.toModel(),
         paymentAmount = paymentAmount,
-        paidAmount = paidAmount
     )
 }
 
@@ -34,8 +31,6 @@ internal fun Offer.toDBO() = OfferDBO(
     id = id ?: randomUUID(),
     annualPercentageRate = annualPercentageRate,
     monthlyPaymentAmount = monthlyPaymentAmount,
-    loan = loan.toDBO(),
-    lenderName = lenderName,
+    user = user.toDBO(),
     paymentAmount = paymentAmount,
-    paidAmount = paidAmount
 )

@@ -1,24 +1,20 @@
 package br.com.amz.replay.offer.model
 
-import br.com.amz.replay.loan.model.LoanOutput
+import br.com.amz.replay.user.model.User
 import java.util.UUID
 
 data class OfferInput(
     val id: UUID? = null,
     val annualPercentageRate: Double,
     val monthlyPaymentAmount: Double,
-    val loanId: UUID,
-    val lenderName: String,
-    val paymentAmount: Int,
-    val paidAmount: Int
+    val userId: UUID,
+    val paymentAmount: Int
 )
 
 data class Offer(
     val id: UUID? = null,
     val annualPercentageRate: Double,
     val monthlyPaymentAmount: Double,
-    val loan: LoanOutput,
-    val lenderName: String,
-    val paymentAmount: Int,
-    val paidAmount: Int
+    val user: User,
+    val paymentAmount: Int
 )

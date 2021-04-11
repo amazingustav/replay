@@ -10,18 +10,15 @@ import javax.persistence.Id
 internal data class UserDBO(
     @Id
     val id: UUID,
-    val name: String,
-    val email: String
+    val name: String
 ): DBO() {
     fun toModel() = User(
         id = id,
-        name = name,
-        email = email
+        name = name
     )
 }
 
 internal fun User.toDBO() = UserDBO(
     id = id ?: randomUUID(),
-    name = name,
-    email = email
+    name = name
 )
