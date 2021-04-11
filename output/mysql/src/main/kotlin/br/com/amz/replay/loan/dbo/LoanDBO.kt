@@ -7,6 +7,7 @@ import br.com.amz.replay.user.dbo.toDBO
 import br.com.amz.replay.vehicle.dbo.VehicleDBO
 import br.com.amz.replay.vehicle.dbo.toDBO
 import io.micronaut.data.annotation.MappedEntity
+import io.micronaut.data.annotation.Relation
 import java.util.UUID
 import java.util.UUID.randomUUID
 import javax.persistence.Id
@@ -15,8 +16,13 @@ import javax.persistence.Id
 internal data class LoanDBO(
     @Id
     val id: UUID,
+
+    @Relation(Relation.Kind.MANY_TO_ONE)
     val user: UserDBO,
+
+    @Relation(Relation.Kind.ONE_TO_ONE)
     val vehicle: VehicleDBO,
+
     val lenderName: String,
     val paidAmount: Int,
     val balance: Double

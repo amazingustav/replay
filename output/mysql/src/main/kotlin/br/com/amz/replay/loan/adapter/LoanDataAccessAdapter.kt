@@ -6,6 +6,8 @@ import br.com.amz.replay.loan.model.LoanOutput
 import br.com.amz.replay.loan.ports.output.LoanDataAccessPort
 import br.com.amz.replay.loan.repository.LoanRepository
 import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.flow.asFlow
+import kotlinx.coroutines.flow.toList
 import kotlinx.coroutines.reactive.awaitSingle
 import kotlinx.coroutines.reactive.awaitSingleOrNull
 import java.util.UUID
@@ -25,5 +27,12 @@ internal class LoanDataAccessAdapter(
         loanRepository.findById(id)
             .awaitSingleOrNull()
             ?.toModel()
+    }
+
+    override suspend fun findByUserId(userId: UUID) = coroutineScope {
+        loanRepository.findByUserId(userId)
+            .asFlow()
+            .toList()
+            .map { it.toModel() }
     }
 }

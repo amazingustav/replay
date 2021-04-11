@@ -8,4 +8,6 @@ interface LoanDataAccessPort {
     suspend fun save(loanOutput: LoanOutput): LoanOutput
 
     suspend fun findById(id: UUID): LoanOutput?
+
+    suspend fun findByUserId(userId: UUID): List<LoanOutput>
 }

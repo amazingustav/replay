@@ -9,6 +9,7 @@ import br.com.amz.replay.user.ports.output.UserDataAccessPort
 import br.com.amz.replay.vehicle.ports.output.VehicleDataAccessPort
 import kotlinx.coroutines.coroutineScope
 import org.slf4j.LoggerFactory
+import java.util.UUID
 import javax.inject.Singleton
 
 @Singleton
@@ -37,6 +38,10 @@ class LoanUseCase(
         loanDataAccessPort.save(loan).also {
             logger.info("Loan saved $it")
         }
+    }
+
+    override suspend fun findByUser(userId: UUID) = coroutineScope {
+        loanDataAccessPort.findByUserId(userId)
     }
 
     companion object {
