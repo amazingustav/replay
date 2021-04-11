@@ -10,8 +10,7 @@ import io.micronaut.data.annotation.MappedEntity
 
 @MappedEntity("user_vehicle_association")
 internal data class UserVehicleAssociationDBO(
-    @EmbeddedId
-    val id: UserVehicleIdDBO
+    @EmbeddedId val id: UserVehicleIdDBO
 ) {
     fun toModel() = UserVehicleAssociation(
         user = id.user.toModel(),
