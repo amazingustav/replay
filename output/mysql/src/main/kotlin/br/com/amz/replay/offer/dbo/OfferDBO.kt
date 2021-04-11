@@ -11,12 +11,14 @@ internal data class OfferDBO(
     val id: UUID,
     val annualPercentageRate: Double,
     val monthlyPaymentAmount: Double,
+    val lenderName: String,
     val paymentAmount: Int
 ) {
     fun toModel() = Offer(
         id = id,
         annualPercentageRate = annualPercentageRate,
         monthlyPaymentAmount = monthlyPaymentAmount,
+        lenderName = lenderName,
         paymentAmount = paymentAmount
     )
 }
@@ -25,5 +27,6 @@ internal fun Offer.toDBO() = OfferDBO(
     id = id ?: randomUUID(),
     annualPercentageRate = annualPercentageRate,
     monthlyPaymentAmount = monthlyPaymentAmount,
+    lenderName = lenderName,
     paymentAmount = paymentAmount
 )

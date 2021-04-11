@@ -6,5 +6,6 @@ data class Offer(
     val id: UUID? = null,
     val annualPercentageRate: Double,
     val monthlyPaymentAmount: Double,
+    val lenderName: String,
     val paymentAmount: Int
 )
