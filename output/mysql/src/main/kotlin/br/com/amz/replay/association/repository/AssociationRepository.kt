@@ -14,6 +14,6 @@ import java.util.UUID
 internal interface AssociationRepository: ReactorCrudRepository<UserVehicleAssociationDBO, UserVehicleIdDBO> {
 
     suspend fun findByIdUserId(userId: UUID): Flux<UserVehicleAssociationDBO>
-
     suspend fun findByIdVehicleId(vehicleId: UUID): Mono<UserVehicleAssociationDBO?>
+    suspend fun findByIdUserIdAndVehicleId(userId: String, vehicleId: String): Mono<UserVehicleAssociationDBO?>
 }
