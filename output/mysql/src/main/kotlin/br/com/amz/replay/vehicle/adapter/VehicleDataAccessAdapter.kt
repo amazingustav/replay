@@ -30,7 +30,7 @@ internal class VehicleDataAccessAdapter(
     }
 
     override suspend fun findById(id: UUID) = coroutineScope {
-        vehicleRepository.findById(id.toString())
+        vehicleRepository.findById(id)
             .awaitSingleOrNull()
             ?.toModel()
     }

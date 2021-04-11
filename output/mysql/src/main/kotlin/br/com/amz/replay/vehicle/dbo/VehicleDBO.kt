@@ -1,5 +1,6 @@
 package br.com.amz.replay.vehicle.dbo
 
+import br.com.amz.replay.DBO
 import br.com.amz.replay.vehicle.model.Vehicle
 import io.micronaut.data.annotation.MappedEntity
 import java.util.UUID
@@ -14,7 +15,7 @@ internal data class VehicleDBO(
     val model: String,
     val year: Short,
     val milesAmount: Int
-) {
+): DBO() {
     fun toModel() = Vehicle(
         id = id,
         make = make,

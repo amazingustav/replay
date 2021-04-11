@@ -1,4 +1,5 @@
 package br.com.amz.replay.user.dbo
+import br.com.amz.replay.DBO
 import br.com.amz.replay.user.model.User
 import io.micronaut.data.annotation.MappedEntity
 import java.util.UUID
@@ -11,7 +12,7 @@ internal data class UserDBO(
     val id: UUID,
     val name: String,
     val email: String
-) {
+): DBO() {
     fun toModel() = User(
         id = id,
         name = name,
