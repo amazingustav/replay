@@ -30,7 +30,7 @@ internal class UserDataAccessAdapter(
     }
 
     override suspend fun findById(id: UUID) = coroutineScope {
-        userRepository.findById(id.toString())
+        userRepository.findById(id)
             .awaitSingleOrNull()
             ?.toModel()
     }

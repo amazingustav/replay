@@ -8,6 +8,8 @@ import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.flow.toList
 import kotlinx.coroutines.reactive.asFlow
 import kotlinx.coroutines.reactive.awaitSingle
+import kotlinx.coroutines.reactive.awaitSingleOrNull
+import java.util.UUID
 import javax.inject.Singleton
 
 @Singleton
@@ -18,6 +20,12 @@ internal class OfferDataAccessAdapter(
         offerRepository.save(offer.toDBO())
             .awaitSingle()
             .toModel()
+    }
+
+    override suspend fun findById(id: UUID) = coroutineScope {
+        offerRepository.findById(id.toString())
+            .awaitSingleOrNull()
+            ?.toModel()
     }
 
     override suspend fun findAll(): List<Offer> = coroutineScope {
