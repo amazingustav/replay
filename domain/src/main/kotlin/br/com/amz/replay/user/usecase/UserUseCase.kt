@@ -12,10 +12,10 @@ class UserUseCase(
     private val userDataAccessPort: UserDataAccessPort,
 ) : UserInputPort {
     override suspend fun save(user: User) = coroutineScope {
-        logger.info("Saving Person: $user")
+        logger.info("Saving user: $user")
 
         userDataAccessPort.save(user).also {
-            logger.info("Person Saved: $it")
+            logger.info("User saved: $it")
         }
     }
 

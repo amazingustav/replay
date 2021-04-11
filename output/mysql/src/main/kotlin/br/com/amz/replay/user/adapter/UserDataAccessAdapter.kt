@@ -4,11 +4,11 @@ import br.com.amz.replay.user.dbo.toDBO
 import br.com.amz.replay.user.model.User
 import br.com.amz.replay.user.ports.output.UserDataAccessPort
 import br.com.amz.replay.user.repository.UserRepository
-import javax.inject.Singleton
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.flow.toList
 import kotlinx.coroutines.reactive.asFlow
 import kotlinx.coroutines.reactive.awaitSingle
+import javax.inject.Singleton
 
 @Singleton
 internal class UserDataAccessAdapter(
@@ -25,8 +25,6 @@ internal class UserDataAccessAdapter(
             .findAll()
             .asFlow()
             .toList()
-            .map { personDBO ->
-                personDBO.toModel()
-            }
+            .map { it.toModel() }
     }
 }
