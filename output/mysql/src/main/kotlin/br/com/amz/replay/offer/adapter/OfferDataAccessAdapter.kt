@@ -23,7 +23,7 @@ internal class OfferDataAccessAdapter(
     }
 
     override suspend fun findById(id: UUID) = coroutineScope {
-        offerRepository.findById(id.toString())
+        offerRepository.findById(id)
             .awaitSingleOrNull()
             ?.toModel()
     }

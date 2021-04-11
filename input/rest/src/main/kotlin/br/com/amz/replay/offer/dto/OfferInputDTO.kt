@@ -1,40 +1,42 @@
-package br.com.amz.replay.offer.dbo
-import br.com.amz.replay.DBO
-import br.com.amz.replay.loan.dbo.LoanDBO
-import br.com.amz.replay.loan.dbo.toDBO
-import br.com.amz.replay.offer.model.Offer
-import io.micronaut.data.annotation.MappedEntity
-import java.util.UUID
-import java.util.UUID.randomUUID
-import javax.persistence.Id
+package br.com.amz.replay.offer.dto
 
-@MappedEntity("offer")
-internal data class OfferDBO(
-    @Id
-    val id: UUID,
+import br.com.amz.replay.loan.dto.LoanOutputDTO
+import br.com.amz.replay.loan.dto.toDTO
+import br.com.amz.replay.offer.model.OfferInput
+import br.com.amz.replay.offer.model.Offer
+import java.util.UUID
+
+data class OfferInputDTO (
     val annualPercentageRate: Double,
     val monthlyPaymentAmount: Double,
-    val loan: LoanDBO,
+    val loanId: UUID,
     val lenderName: String,
     val paymentAmount: Int,
     val paidAmount: Int
-): DBO() {
-    fun toModel() = Offer(
-        id = id,
+) {
+    fun toModel() = OfferInput(
         annualPercentageRate = annualPercentageRate,
         monthlyPaymentAmount = monthlyPaymentAmount,
-        loan = loan.toModel(),
+        loanId = loanId,
         lenderName = lenderName,
         paymentAmount = paymentAmount,
         paidAmount = paidAmount
     )
 }
 
-internal fun Offer.toDBO() = OfferDBO(
-    id = id ?: randomUUID(),
+data class OfferOutputDTO (
+    val annualPercentageRate: Double,
+    val monthlyPaymentAmount: Double,
+    val loanOutputDTO: LoanOutputDTO,
+    val lenderName: String,
+    val paymentAmount: Int,
+    val paidAmount: Int
+)
+
+fun Offer.toDTO() = OfferOutputDTO(
     annualPercentageRate = annualPercentageRate,
     monthlyPaymentAmount = monthlyPaymentAmount,
-    loan = loan.toDBO(),
+    loanOutputDTO = loan.toDTO(),
     lenderName = lenderName,
     paymentAmount = paymentAmount,
     paidAmount = paidAmount
