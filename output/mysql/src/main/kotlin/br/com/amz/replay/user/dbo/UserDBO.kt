@@ -1,17 +1,25 @@
 package br.com.amz.replay.user.dbo
-import br.com.amz.replay.DBO
+
 import br.com.amz.replay.user.model.User
+import io.micronaut.data.annotation.DateCreated
+import io.micronaut.data.annotation.DateUpdated
 import io.micronaut.data.annotation.MappedEntity
-import java.util.UUID
+import java.time.Instant
+import java.util.*
 import java.util.UUID.randomUUID
 import javax.persistence.Id
 
 @MappedEntity("user")
-internal data class UserDBO(
+data class UserDBO(
     @Id
-    val id: UUID,
-    val name: String
-): DBO() {
+    val id: UUID = randomUUID(),
+    val name: String = "",
+    @DateCreated
+    var createdAt: Instant = Instant.now(),
+    @DateUpdated
+    var modifiedAt: Instant? = null
+) {
+
     fun toModel() = User(
         id = id,
         name = name

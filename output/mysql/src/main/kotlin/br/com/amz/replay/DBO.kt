@@ -1,8 +1,9 @@
 package br.com.amz.replay
 
-import java.time.ZonedDateTime
+import io.micronaut.data.annotation.DateCreated
+import io.micronaut.data.annotation.DateUpdated
+import java.time.Instant
 
 abstract class DBO {
-    lateinit var createdAt: ZonedDateTime
-    lateinit var modifiedAt: ZonedDateTime
+
 }

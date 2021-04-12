@@ -1,32 +1,34 @@
 package br.com.amz.replay.loan.dbo
 
-import br.com.amz.replay.DBO
 import br.com.amz.replay.loan.model.LoanOutput
 import br.com.amz.replay.user.dbo.UserDBO
 import br.com.amz.replay.user.dbo.toDBO
 import br.com.amz.replay.vehicle.dbo.VehicleDBO
 import br.com.amz.replay.vehicle.dbo.toDBO
+import io.micronaut.data.annotation.DateCreated
+import io.micronaut.data.annotation.DateUpdated
 import io.micronaut.data.annotation.MappedEntity
-import io.micronaut.data.annotation.Relation
+import java.time.Instant
 import java.util.UUID
 import java.util.UUID.randomUUID
-import javax.persistence.Id
+import javax.persistence.*
 
 @MappedEntity("loan")
-internal data class LoanDBO(
+data class LoanDBO(
     @Id
-    val id: UUID,
-
-    @Relation(Relation.Kind.MANY_TO_ONE)
+    val id: UUID = randomUUID(),
+    @ManyToOne
     val user: UserDBO,
-
-    @Relation(Relation.Kind.ONE_TO_ONE)
+    @OneToOne
     val vehicle: VehicleDBO,
-
     val lenderName: String,
     val paidAmount: Int,
-    val balance: Double
-): DBO() {
+    val balance: Double,
+    @DateCreated
+    var createdAt: Instant = Instant.now(),
+    @DateUpdated
+    var modifiedAt: Instant? = null
+) {
     fun toModel() = LoanOutput(
         id = id,
         user = user.toModel(),

@@ -8,8 +8,11 @@ import br.com.amz.replay.loan.repository.LoanRepository
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.flow.asFlow
 import kotlinx.coroutines.flow.toList
+import kotlinx.coroutines.reactive.asFlow
+import kotlinx.coroutines.reactive.asFlowDeprecated
 import kotlinx.coroutines.reactive.awaitSingle
 import kotlinx.coroutines.reactive.awaitSingleOrNull
+import kotlinx.coroutines.runBlocking
 import java.util.UUID
 import javax.inject.Singleton
 
@@ -30,9 +33,6 @@ internal class LoanDataAccessAdapter(
     }
 
     override suspend fun findByUserId(userId: UUID) = coroutineScope {
-        loanRepository.findByUserId(userId)
-            .asFlow()
-            .toList()
-            .map { it.toModel() }
+        loanRepository.findByUserId(userId).asFlow().toList().map { it.toModel() }
     }
 }

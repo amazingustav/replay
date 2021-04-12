@@ -14,6 +14,6 @@ CREATE TABLE loan (
     UNIQUE KEY uc_vehicle_id (vehicle_id)
 ) ENGINE = INNODB;
 
-INSERT INTO loan VALUES (uuid(), (SELECT ID FROM vehicle LIMIT 1), (SELECT ID FROM user LIMIT 1), 'Santander Consumer USA', 54, 15000.00, now(), NULL);
-INSERT INTO loan VALUES (uuid(), (SELECT ID FROM vehicle LIMIT 1,1), (SELECT ID FROM user LIMIT 1), 'Santander Consumer USA', 50, 18500.00, now(), NULL);
-INSERT INTO loan VALUES (uuid(), (SELECT ID FROM vehicle LIMIT 2,2), (SELECT ID FROM user LIMIT 1), 'Santander Consumer USA', 32, 13700.00, now(), NULL);
+INSERT INTO loan VALUES (uuid(), (SELECT ID FROM vehicle LIMIT 1), (SELECT ID FROM user LIMIT 1), 'The Big Bank', 54, 15000.00, now(), NULL);
+INSERT INTO loan VALUES (uuid(), (SELECT ID FROM vehicle LIMIT 1,1), (SELECT ID FROM user LIMIT 1), 'The Credit Union', 50, 18500.00, now(), NULL);
+INSERT INTO loan VALUES (uuid(), (SELECT ID FROM vehicle LIMIT 2,2), (SELECT ID FROM user LIMIT 1), 'The Auto-Lender', 32, 13700.00, now(), NULL);

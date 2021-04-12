@@ -7,4 +7,4 @@ import io.micronaut.data.r2dbc.repository.ReactorCrudRepository
 import java.util.UUID
 
 @R2dbcRepository(dialect = Dialect.MYSQL)
-internal interface UserRepository: ReactorCrudRepository<UserDBO, UUID>
+interface UserRepository: ReactorCrudRepository<UserDBO, UUID>

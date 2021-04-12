@@ -5,7 +5,7 @@ import br.com.amz.replay.vehicle.model.Vehicle
 data class VehicleDTO (
     val make: String,
     val model: String,
-    val year: Short,
+    val year: Int,
     val milesAmount: Int
 ) {
     fun toModel() = Vehicle(

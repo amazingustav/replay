@@ -4,10 +4,10 @@ volumes:
   user-data:
 
 services:
-  replay_service:
+  database:
     image: mysql:8.0
     restart: always
-    container_name: replay-micronaut
+    container_name: replay-database
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: replay
@@ -15,3 +15,9 @@ services:
       MYSQL_PASSWORD: r_pwd
     ports:
       - "3311:3306"
+  api:
+    container_name: replay-api
+    build: .
+    depends_on:
+      - database
+    network_mode: host
