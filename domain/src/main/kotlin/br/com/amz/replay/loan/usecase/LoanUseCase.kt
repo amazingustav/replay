@@ -5,6 +5,7 @@ import br.com.amz.replay.loan.model.LoanInput
 import br.com.amz.replay.loan.model.LoanOutput
 import br.com.amz.replay.loan.ports.input.LoanInputPort
 import br.com.amz.replay.loan.ports.output.LoanDataAccessPort
+import br.com.amz.replay.user.model.User
 import br.com.amz.replay.user.ports.output.UserDataAccessPort
 import br.com.amz.replay.vehicle.ports.output.VehicleDataAccessPort
 import kotlinx.coroutines.coroutineScope
@@ -18,14 +19,13 @@ class LoanUseCase(
     private val userDataAccessPort: UserDataAccessPort,
     private val vehicleDataAccessPort: VehicleDataAccessPort
 ) : LoanInputPort {
-    override suspend fun save(loanInput: LoanInput) = coroutineScope {
-        logger.info("Saving loan $loanInput")
 
+    override suspend fun save(loanInput: LoanInput) = coroutineScope {
         val user = userDataAccessPort.findById(loanInput.userId)
-            ?: throw ResourceNotFoundException("User not found for id ${loanInput.userId}")
+            ?: throw ResourceNotFoundException("User ${loanInput.userId} not found while creating a loan")
 
         val vehicle = vehicleDataAccessPort.findById(loanInput.vehicleId)
-            ?: throw ResourceNotFoundException("Vehicle not found for id ${loanInput.vehicleId}")
+            ?: throw ResourceNotFoundException("Vehicle ${loanInput.vehicleId} not found while creating a loan")
 
         val loan = LoanOutput(
             user = user,
@@ -36,12 +36,16 @@ class LoanUseCase(
         )
 
         loanDataAccessPort.save(loan).also {
-            logger.info("Loan saved $it")
+            logger.info("Loan saved. Id: ${it.id}")
         }
     }
 
     override suspend fun findByUser(userId: UUID) = coroutineScope {
         loanDataAccessPort.findByUserId(userId)
+    }
+
+    override suspend fun findAll(): List<LoanOutput> = coroutineScope {
+        loanDataAccessPort.findAll()
     }
 
     companion object {

@@ -20,6 +20,7 @@ import javax.inject.Singleton
 internal class LoanDataAccessAdapter(
     private val loanRepository: LoanRepository
 ) : LoanDataAccessPort {
+
     override suspend fun save(loanOutput: LoanOutput) = coroutineScope {
         loanRepository.save(loanOutput.toDBO())
             .awaitSingle()
@@ -33,6 +34,16 @@ internal class LoanDataAccessAdapter(
     }
 
     override suspend fun findByUserId(userId: UUID) = coroutineScope {
-        loanRepository.findByUserId(userId).asFlow().toList().map { it.toModel() }
+        loanRepository.findByUserId(userId)
+            .asFlow()
+            .toList()
+            .map { it.toModel() }
+    }
+
+    override suspend fun findAll() = coroutineScope {
+        loanRepository.findAll()
+            .asFlow()
+            .toList()
+            .map { it.toModel() }
     }
 }
