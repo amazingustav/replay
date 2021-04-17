@@ -16,13 +16,14 @@ import javax.inject.Singleton
 internal class VehicleDataAccessAdapter(
     private val vehicleRepository: VehicleRepository
 ) : VehicleDataAccessPort {
+
     override suspend fun save(vehicle: Vehicle) = coroutineScope {
         vehicleRepository.save(vehicle.toDBO())
             .awaitSingle()
             .toModel()
     }
 
-    override suspend fun findAll(): List<Vehicle> = coroutineScope {
+    override suspend fun findAll() = coroutineScope {
         vehicleRepository.findAll()
             .asFlow()
             .toList()

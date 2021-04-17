@@ -15,19 +15,14 @@ import javax.persistence.*
 
 @MappedEntity("loan")
 data class LoanDBO(
-    @Id
-    val id: UUID = randomUUID(),
-    @ManyToOne
-    val user: UserDBO,
-    @OneToOne
-    val vehicle: VehicleDBO,
+    @Id val id: UUID = randomUUID(),
+    @ManyToOne val user: UserDBO,
+    @OneToOne val vehicle: VehicleDBO,
     val lenderName: String,
     val paidAmount: Int,
     val balance: Double,
-    @DateCreated
-    var createdAt: Instant = Instant.now(),
-    @DateUpdated
-    var modifiedAt: Instant? = null
+    @DateCreated var createdAt: Instant = Instant.now(),
+    @DateUpdated var modifiedAt: Instant? = null
 ) {
     fun toModel() = LoanOutput(
         id = id,

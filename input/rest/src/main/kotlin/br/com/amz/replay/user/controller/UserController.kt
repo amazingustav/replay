@@ -14,6 +14,7 @@ import kotlinx.coroutines.coroutineScope
 class UserController(
     private val userInputPort: UserInputPort
 ) {
+
     @Post(produces = [APPLICATION_JSON])
     suspend fun save(@Body userDTO: UserDTO) = coroutineScope {
         userInputPort.save(userDTO.toModel()).toDTO()

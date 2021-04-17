@@ -11,16 +11,13 @@ import javax.persistence.Id
 
 @MappedEntity("vehicle")
 data class VehicleDBO(
-    @Id
-    val id: UUID = randomUUID(),
+    @Id val id: UUID = randomUUID(),
     val make: String = "",
     val model: String = "",
     val year: Int = 0,
     val milesAmount: Int = 0,
-    @DateCreated
-    var createdAt: Instant = Instant.now(),
-    @DateUpdated
-    var modifiedAt: Instant? = null
+    @DateCreated var createdAt: Instant = Instant.now(),
+    @DateUpdated var modifiedAt: Instant? = null
 ) {
     fun toModel() = Vehicle(
         id = id,

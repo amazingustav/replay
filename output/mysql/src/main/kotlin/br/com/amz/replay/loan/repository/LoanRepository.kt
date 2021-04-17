@@ -12,6 +12,7 @@ import io.micronaut.data.annotation.repeatable.JoinSpecifications
 
 @R2dbcRepository(dialect = Dialect.MYSQL)
 interface LoanRepository: ReactorCrudRepository<LoanDBO, UUID> {
+
     @JoinSpecifications(
         Join("user"),
         Join("vehicle")

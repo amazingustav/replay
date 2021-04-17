@@ -16,13 +16,14 @@ import javax.inject.Singleton
 internal class UserDataAccessAdapter(
     private val userRepository: UserRepository
 ) : UserDataAccessPort {
+
     override suspend fun save(user: User) = coroutineScope {
         userRepository.save(user.toDBO())
             .awaitSingle()
             .toModel()
     }
 
-    override suspend fun findAll(): List<User> = coroutineScope {
+    override suspend fun findAll() = coroutineScope {
         userRepository.findAll()
             .asFlow()
             .toList()

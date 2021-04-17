@@ -5,4 +5,4 @@ CREATE TABLE user (
     modified_at DATETIME
 ) ENGINE = INNODB;
 
-INSERT INTO user (id, name, created_at, modified_at) VALUES (uuid(), 'John Doe', now(), NULL)
+INSERT INTO user (id, name, created_at, modified_at) VALUES (uuid(), 'John Doe', now(), NULL);
