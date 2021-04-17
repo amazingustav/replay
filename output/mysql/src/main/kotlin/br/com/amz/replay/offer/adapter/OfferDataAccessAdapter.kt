@@ -16,6 +16,7 @@ import javax.inject.Singleton
 internal class OfferDataAccessAdapter(
     private val offerRepository: OfferRepository
 ) : OfferDataAccessPort {
+
     override suspend fun save(offer: Offer) = coroutineScope {
         offerRepository.save(offer.toDBO())
             .awaitSingle()
@@ -28,9 +29,15 @@ internal class OfferDataAccessAdapter(
             ?.toModel()
     }
 
-    override suspend fun findAll(): List<Offer> = coroutineScope {
-        offerRepository
-            .findAll()
+    override suspend fun findAll() = coroutineScope {
+        offerRepository.findAll()
+            .asFlow()
+            .toList()
+            .map { it.toModel() }
+    }
+
+    override suspend fun findByUserId(userId: UUID) = coroutineScope {
+        offerRepository.findByUserId(userId)
             .asFlow()
             .toList()
             .map { it.toModel() }

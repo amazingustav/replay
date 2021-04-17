@@ -23,13 +23,13 @@ data class OfferInputDTO (
 data class OfferOutputDTO (
     val annualPercentageRate: Double,
     val monthlyPaymentAmount: Double,
-    val userDTO: UserDTO,
+    val user: UserDTO,
     val paymentAmount: Int,
 )
 
 fun Offer.toDTO() = OfferOutputDTO(
     annualPercentageRate = annualPercentageRate,
     monthlyPaymentAmount = monthlyPaymentAmount,
-    userDTO = user.toDTO(),
+    user = user.toDTO(),
     paymentAmount = paymentAmount
 )

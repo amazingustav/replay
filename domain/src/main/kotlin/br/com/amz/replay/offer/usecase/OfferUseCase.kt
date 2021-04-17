@@ -8,6 +8,7 @@ import br.com.amz.replay.offer.ports.output.OfferDataAccessPort
 import br.com.amz.replay.user.ports.output.UserDataAccessPort
 import kotlinx.coroutines.coroutineScope
 import org.slf4j.LoggerFactory
+import java.util.*
 import javax.inject.Singleton
 
 @Singleton
@@ -15,11 +16,10 @@ class OfferUseCase(
     private val offerDataAccessPort: OfferDataAccessPort,
     private val userDataAccessPort: UserDataAccessPort,
 ) : OfferInputPort {
-    override suspend fun save(offer: OfferInput) = coroutineScope {
-        logger.info("Saving offer ${offer.id}")
 
+    override suspend fun save(offer: OfferInput) = coroutineScope {
         val user = userDataAccessPort.findById(offer.userId)
-            ?: throw ResourceNotFoundException("User not found for id ${offer.userId}")
+            ?: throw ResourceNotFoundException("User ${offer.userId} not found while saving offer")
 
         offerDataAccessPort.save(
             Offer(
@@ -29,12 +29,16 @@ class OfferUseCase(
                 paymentAmount = offer.paymentAmount
             )
         ).also {
-            logger.info("Offer ${it.id} saved")
+            logger.info("Offer saved. Id: ${it.id}")
         }
     }
 
-    override suspend fun findAll(): List<Offer> = coroutineScope {
+    override suspend fun findAll() = coroutineScope {
         offerDataAccessPort.findAll()
+    }
+
+    override suspend fun findByUser(userId: UUID) = coroutineScope {
+        offerDataAccessPort.findByUserId(userId)
     }
 
     companion object {

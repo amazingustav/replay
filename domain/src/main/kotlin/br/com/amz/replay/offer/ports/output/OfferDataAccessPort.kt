@@ -10,4 +10,6 @@ interface OfferDataAccessPort {
     suspend fun findById(id: UUID): Offer?
 
     suspend fun findAll(): List<Offer>
+
+    suspend fun findByUserId(userId: UUID): List<Offer>
 }
