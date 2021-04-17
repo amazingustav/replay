@@ -24,6 +24,6 @@ data class UserDBO(
 }
 
 internal fun User.toDBO() = UserDBO(
-    id = id ?: randomUUID(),
+    id = id,
     name = name
 )
