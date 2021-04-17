@@ -11,11 +11,10 @@ import javax.inject.Singleton
 class VehicleUseCase(
     private val vehicleDataAccessPort: VehicleDataAccessPort,
 ) : VehicleInputPort {
-    override suspend fun save(vehicle: Vehicle) = coroutineScope {
-        logger.info("Saving vehicle '$vehicle'")
 
+    override suspend fun save(vehicle: Vehicle) = coroutineScope {
         vehicleDataAccessPort.save(vehicle).also {
-            logger.info("Vehicle '$it' saved")
+            logger.info("Vehicle saved. Id: ${it.id}")
         }
     }
 

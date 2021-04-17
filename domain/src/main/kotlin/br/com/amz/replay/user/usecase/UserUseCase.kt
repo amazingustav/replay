@@ -11,11 +11,10 @@ import org.slf4j.LoggerFactory
 class UserUseCase(
     private val userDataAccessPort: UserDataAccessPort,
 ) : UserInputPort {
-    override suspend fun save(user: User) = coroutineScope {
-        logger.info("Saving user: $user")
 
+    override suspend fun save(user: User) = coroutineScope {
         userDataAccessPort.save(user).also {
-            logger.info("User saved: $it")
+            logger.info("User saved. Id: ${it.id}")
         }
     }
 
