@@ -4,7 +4,5 @@ import br.com.amz.replay.user.model.User
 
 interface UserInputPort {
 
-    suspend fun save(user: User): User
-
     suspend fun findAll(): List<User>
 }

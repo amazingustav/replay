@@ -8,6 +8,4 @@ interface UserDataAccessPort {
     suspend fun save(user: User): User
 
     suspend fun findAll(): List<User>
-
-    suspend fun findById(id: UUID): User?
 }

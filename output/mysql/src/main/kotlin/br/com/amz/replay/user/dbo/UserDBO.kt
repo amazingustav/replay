@@ -11,13 +11,10 @@ import javax.persistence.Id
 
 @MappedEntity("user")
 data class UserDBO(
-    @Id
-    val id: UUID = randomUUID(),
+    @Id val id: UUID = randomUUID(),
     val name: String = "",
-    @DateCreated
-    var createdAt: Instant = Instant.now(),
-    @DateUpdated
-    var modifiedAt: Instant? = null
+    @DateCreated var createdAt: Instant = Instant.now(),
+    @DateUpdated var modifiedAt: Instant? = null
 ) {
 
     fun toModel() = User(
