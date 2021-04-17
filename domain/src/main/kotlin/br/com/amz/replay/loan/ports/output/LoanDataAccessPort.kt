@@ -8,4 +8,6 @@ interface LoanDataAccessPort {
     suspend fun findById(id: UUID): Loan?
 
     suspend fun findAll(): List<Loan>
+
+    suspend fun findByUser(userId: UUID): List<Loan>
 }

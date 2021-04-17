@@ -6,7 +6,7 @@ import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.flow.toList
 import kotlinx.coroutines.reactive.asFlow
 import kotlinx.coroutines.reactive.awaitSingleOrNull
-import java.util.*
+import java.util.UUID
 import javax.inject.Singleton
 
 @Singleton
@@ -22,6 +22,13 @@ internal class LoanDataAccessAdapter(
 
     override suspend fun findAll() = coroutineScope {
         loanRepository.findAll()
+            .asFlow()
+            .toList()
+            .map { it.toModel() }
+    }
+
+    override suspend fun findByUser(userId: UUID) = coroutineScope {
+        loanRepository.findByUserId(userId)
             .asFlow()
             .toList()
             .map { it.toModel() }

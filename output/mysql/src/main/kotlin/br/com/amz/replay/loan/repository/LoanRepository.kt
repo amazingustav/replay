@@ -8,7 +8,7 @@ import io.micronaut.data.r2dbc.annotation.R2dbcRepository
 import io.micronaut.data.r2dbc.repository.ReactorCrudRepository
 import reactor.core.publisher.Flux
 import reactor.core.publisher.Mono
-import java.util.*
+import java.util.UUID
 
 @R2dbcRepository(dialect = Dialect.MYSQL)
 interface LoanRepository: ReactorCrudRepository<LoanDBO, UUID> {
@@ -26,4 +26,11 @@ interface LoanRepository: ReactorCrudRepository<LoanDBO, UUID> {
         Join("offer")
     )
     override fun findById(id: UUID): Mono<LoanDBO>
+
+    @JoinSpecifications(
+        Join("vehicle"),
+        Join("user"),
+        Join("offer")
+    )
+    fun findByUserId(userId: UUID): Flux<LoanDBO>
 }

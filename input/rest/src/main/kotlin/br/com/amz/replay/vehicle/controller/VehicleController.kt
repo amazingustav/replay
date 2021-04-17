@@ -7,7 +7,7 @@ import io.micronaut.http.annotation.Controller
 import io.micronaut.http.annotation.Get
 import kotlinx.coroutines.coroutineScope
 
-@Controller("/vehicle")
+@Controller("/vehicles")
 class VehicleController(
     private val vehicleInputPort: VehicleInputPort
 ) {

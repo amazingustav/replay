@@ -7,7 +7,7 @@ import io.micronaut.http.annotation.Controller
 import io.micronaut.http.annotation.Get
 import kotlinx.coroutines.coroutineScope
 
-@Controller("/user")
+@Controller("/users")
 class UserController(
     private val userInputPort: UserInputPort
 ) {

@@ -7,7 +7,7 @@ import io.micronaut.http.annotation.Controller
 import io.micronaut.http.annotation.Get
 import kotlinx.coroutines.coroutineScope
 
-@Controller("/offer")
+@Controller("/offers")
 class OfferController(
     private val offerInputPort: OfferInputPort
 ) {
