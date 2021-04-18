@@ -14,6 +14,7 @@ import io.micronaut.http.annotation.Body
 import io.micronaut.http.annotation.Controller
 import io.micronaut.http.annotation.Get
 import io.micronaut.http.annotation.PathVariable
+import io.micronaut.http.annotation.Post
 import java.util.UUID
 
 @Controller("/loans")
@@ -31,7 +32,7 @@ class LoanController(
         return loanInputPort.findByUser(userId).map { it.toDTO() }
     }
 
-    @Get(value = "/submitOffer", produces = [APPLICATION_JSON])
+    @Post(value = "/submitOffer", produces = [APPLICATION_JSON])
     suspend fun submitOffer(@Body offerSubmissionDTO: OfferSubmissionDTO): MutableHttpResponse<out Any> {
         return loanInputPort.submitOffer(
             offer = offerSubmissionDTO.toOfferModel(),

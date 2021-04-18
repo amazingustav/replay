@@ -41,6 +41,4 @@ internal class LoanDataAccessAdapter(
             .toList()
             .map { it.toModel() }
     }
-
-
 }
