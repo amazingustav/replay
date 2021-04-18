@@ -6,6 +6,9 @@ import br.com.amz.replay.offer.model.ProposalOffer
 import br.com.amz.replay.offer.ports.input.OfferInputPort
 import br.com.amz.replay.offer.ports.output.OfferDataAccessPort
 import kotlinx.coroutines.coroutineScope
+import java.math.BigDecimal
+import java.math.RoundingMode
+import java.util.Currency
 import java.util.UUID
 import javax.inject.Singleton
 import kotlin.math.pow
@@ -50,14 +53,18 @@ class OfferUseCase(
      *
      * MP = Monthly Payment
      * LB = Loan Balance
-     * APR = Annual Percentage Rate
+     * APR = Annual Percentage Rate (as decimal)
      * N = Number of months
      * */
-    private fun calculateLoanPayment(balance: Double, apr: Double, monthsRemaining: Int): Double {
-        val ratePerPeriod = 1 + apr / 12
-        val monthlyPayment = ratePerPeriod.pow(monthsRemaining) / (ratePerPeriod.pow(monthsRemaining) - 1)
+    private fun calculateLoanPayment(balance: BigDecimal, apr: Double, monthsRemaining: Int): BigDecimal {
+        val ratePerPeriod = apr / 100 / 12
+        val ratePerPeriodPlusOne = (1 + ratePerPeriod).pow(monthsRemaining).toBigDecimal()
 
-        return balance * (apr / 12) * monthlyPayment
+        val functionX = ratePerPeriod.toBigDecimal() * ratePerPeriodPlusOne
+        val functionY = ratePerPeriodPlusOne - 1.toBigDecimal()
+        val finalRate = functionX / functionY
+
+        return (balance * finalRate).setScale(2, RoundingMode.HALF_EVEN)
     }
 
     companion object {
