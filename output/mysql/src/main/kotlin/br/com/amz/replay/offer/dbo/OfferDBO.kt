@@ -10,7 +10,7 @@ import javax.persistence.Id
 
 @MappedEntity("offer")
 data class OfferDBO(
-    @Id val id: UUID,
+    @Id val id: UUID = UUID.randomUUID(),
     val monthlyPaymentAmount: Double,
     val annualPercentageRate: Double,
     val paymentAmount: Int,
@@ -24,10 +24,3 @@ data class OfferDBO(
         paymentAmount = paymentAmount,
     )
 }
-
-internal fun Offer.toDBO() = OfferDBO(
-    id = id ?: UUID.randomUUID(),
-    monthlyPaymentAmount = monthlyPaymentAmount,
-    annualPercentageRate = annualPercentageRate,
-    paymentAmount = paymentAmount
-)

@@ -6,7 +6,7 @@ import br.com.amz.replay.vehicle.model.Vehicle
 import java.util.UUID
 
 data class Loan(
-    val id: UUID? = null,
+    val id: UUID,
     val vehicle: Vehicle,
     val offer: Offer,
     val user: User,

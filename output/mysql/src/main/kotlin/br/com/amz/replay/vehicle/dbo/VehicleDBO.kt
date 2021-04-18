@@ -28,7 +28,7 @@ data class VehicleDBO(
 }
 
 internal fun Vehicle.toDBO() = VehicleDBO(
-    id = id ?: UUID.randomUUID(),
+    id = id,
     make = make,
     model = model,
     year = year,

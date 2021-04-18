@@ -3,7 +3,7 @@ package br.com.amz.replay.offer.model
 import java.util.UUID
 
 data class Offer(
-    val id: UUID? = null,
+    val id: UUID,
     val monthlyPaymentAmount: Double,
     val annualPercentageRate: Double,
     val paymentAmount: Int
