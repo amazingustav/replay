@@ -77,6 +77,9 @@ subprojects {
         kaptTest("io.micronaut:micronaut-bom:${micronautVersion}")
         kaptTest("io.micronaut:micronaut-inject-java")
 
+        testImplementation("io.micronaut.test:micronaut-test-kotest")
+        testImplementation("io.mockk:mockk:1.10.5")
+        testImplementation("io.kotest:kotest-runner-junit5-jvm:4.3.0")
         testImplementation(platform("io.micronaut:micronaut-bom:${micronautVersion}"))
     }
 
@@ -85,6 +88,10 @@ subprojects {
     }
 
     tasks {
+        test {
+            useJUnitPlatform()
+        }
+
         compileKotlin {
             kotlinOptions {
                 jvmTarget = "11"

@@ -2,11 +2,8 @@ package br.com.amz.replay.loan.dbo
 
 import br.com.amz.replay.loan.model.Loan
 import br.com.amz.replay.offer.dbo.OfferDBO
-import br.com.amz.replay.offer.dbo.toDBO
 import br.com.amz.replay.user.dbo.UserDBO
-import br.com.amz.replay.user.model.User
 import br.com.amz.replay.vehicle.dbo.VehicleDBO
-import br.com.amz.replay.vehicle.dbo.toDBO
 import io.micronaut.data.annotation.DateCreated
 import io.micronaut.data.annotation.DateUpdated
 import io.micronaut.data.annotation.MappedEntity
