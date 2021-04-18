@@ -2,13 +2,12 @@ package br.com.amz.replay.offer.usecase
 
 import br.com.amz.replay.exception.ResourceNotFoundException
 import br.com.amz.replay.loan.ports.output.LoanDataAccessPort
+import br.com.amz.replay.offer.model.Offer
 import br.com.amz.replay.offer.model.ProposalOffer
 import br.com.amz.replay.offer.ports.input.OfferInputPort
 import br.com.amz.replay.offer.ports.output.OfferDataAccessPort
-import kotlinx.coroutines.coroutineScope
 import java.math.BigDecimal
 import java.math.RoundingMode
-import java.util.Currency
 import java.util.UUID
 import javax.inject.Singleton
 import kotlin.math.pow
@@ -19,9 +18,7 @@ class OfferUseCase(
     private val loanDataAccessPort: LoanDataAccessPort
 ) : OfferInputPort {
 
-    override suspend fun findAll() = coroutineScope {
-        offerDataAccessPort.findAll()
-    }
+    override suspend fun findAll(): List<Offer> = offerDataAccessPort.findAll()
 
     override suspend fun generateProposalOffers(loanId: UUID): List<ProposalOffer> {
         val loan = loanDataAccessPort.findById(loanId)

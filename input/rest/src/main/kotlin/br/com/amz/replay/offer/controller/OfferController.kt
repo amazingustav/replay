@@ -1,6 +1,7 @@
 package br.com.amz.replay.offer.controller
 
 import br.com.amz.replay.exception.ResourceNotFoundException
+import br.com.amz.replay.offer.dto.OfferDTO
 import br.com.amz.replay.offer.dto.toDTO
 import br.com.amz.replay.offer.ports.input.OfferInputPort
 import io.micronaut.http.HttpResponse
@@ -9,7 +10,6 @@ import io.micronaut.http.MutableHttpResponse
 import io.micronaut.http.annotation.Controller
 import io.micronaut.http.annotation.Get
 import io.micronaut.http.annotation.PathVariable
-import kotlinx.coroutines.coroutineScope
 import java.util.UUID
 
 @Controller("/offers")
@@ -18,8 +18,8 @@ class OfferController(
 ) {
 
     @Get(produces = [APPLICATION_JSON])
-    suspend fun findAll() = coroutineScope {
-        offerInputPort.findAll().map { it.toDTO() }
+    suspend fun findAll(): List<OfferDTO> {
+        return offerInputPort.findAll().map { it.toDTO() }
     }
 
     @Get(value = "/generate/{loanId}", produces = [APPLICATION_JSON])

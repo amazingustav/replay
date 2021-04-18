@@ -1,11 +1,11 @@
 package br.com.amz.replay.user.controller
 
+import br.com.amz.replay.user.dto.UserDTO
 import br.com.amz.replay.user.dto.toDTO
 import br.com.amz.replay.user.ports.input.UserInputPort
 import io.micronaut.http.MediaType.APPLICATION_JSON
 import io.micronaut.http.annotation.Controller
 import io.micronaut.http.annotation.Get
-import kotlinx.coroutines.coroutineScope
 
 @Controller("/users")
 class UserController(
@@ -13,7 +13,7 @@ class UserController(
 ) {
 
     @Get(produces = [APPLICATION_JSON])
-    suspend fun findAll() = coroutineScope {
-        userInputPort.findAll().map { it.toDTO() }
+    suspend fun findAll(): List<UserDTO> {
+        return userInputPort.findAll().map { it.toDTO() }
     }
 }

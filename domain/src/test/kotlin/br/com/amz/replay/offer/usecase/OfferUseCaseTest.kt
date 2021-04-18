@@ -12,6 +12,7 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runBlockingTest
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
+import java.math.BigDecimal
 import java.util.UUID
 
 @ExtendWith(MockKExtension::class)
@@ -61,11 +62,11 @@ class OfferUseCaseTest {
     @Test
     fun `should generate proposal offers with given APR and loan balance when generate offer`() = runBlockingTest {
         // Given
-        val offer = Offer(                                 // Given the following scenario:
+        val offer = Offer(                            // Given the following scenario:
             id = UUID.randomUUID(),
-            monthlyPaymentAmount = 0.0.toBigDecimal(),     // Balance - R$ 10.000,00
-            annualPercentageRate = 7.5,                    // APR - 7.5% per year / 12 months = 0.625 (and finally 0.00625 as BigDecimal)
-            paymentAmount = 0                              // Time remaining - 60/72/84 months
+            monthlyPaymentAmount = BigDecimal.ZERO,   // Balance - R$ 10.000,00
+            annualPercentageRate = 7.5,               // APR - 7.5% per year / 12 months = 0.625 (and finally 0.00625 as decimal)
+            paymentAmount = 0                         // Time remaining - 60/72/84 months
         )
 
         val loan = createMockLoan(offer)
