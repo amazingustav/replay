@@ -6,7 +6,7 @@ import java.math.BigDecimal
 import java.util.UUID
 
 data class OfferDTO (
-    val id: UUID,
+    val id: UUID?,
     val monthlyPaymentAmount: BigDecimal,
     val annualPercentageRate: Double,
     val paymentAmount: Int,

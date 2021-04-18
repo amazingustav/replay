@@ -5,6 +5,8 @@ import java.util.UUID
 
 interface LoanDataAccessPort {
 
+    suspend fun update(loan: Loan): Loan
+
     suspend fun findById(id: UUID): Loan?
 
     suspend fun findAll(): List<Loan>

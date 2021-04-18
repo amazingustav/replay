@@ -5,6 +5,8 @@ import java.util.UUID
 
 interface OfferDataAccessPort {
 
+    suspend fun save(offer: Offer): Offer
+
     suspend fun findById(id: UUID): Offer?
 
     suspend fun findAll(): List<Offer>

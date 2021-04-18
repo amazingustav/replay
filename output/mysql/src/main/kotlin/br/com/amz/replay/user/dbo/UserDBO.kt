@@ -21,3 +21,8 @@ data class UserDBO(
         name = name
     )
 }
+
+internal fun User.toDBO() = UserDBO(
+    id = id,
+    name = name
+)

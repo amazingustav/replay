@@ -1,6 +1,8 @@
 package br.com.amz.replay.offer.dbo
 
 import br.com.amz.replay.offer.model.Offer
+import br.com.amz.replay.vehicle.dbo.VehicleDBO
+import br.com.amz.replay.vehicle.model.Vehicle
 import io.micronaut.data.annotation.DateCreated
 import io.micronaut.data.annotation.DateUpdated
 import io.micronaut.data.annotation.MappedEntity
@@ -25,3 +27,10 @@ data class OfferDBO(
         paymentAmount = paymentAmount,
     )
 }
+
+internal fun Offer.toDBO() = OfferDBO(
+    id = id,
+    monthlyPaymentAmount = monthlyPaymentAmount,
+    annualPercentageRate = annualPercentageRate,
+    paymentAmount = paymentAmount
+)

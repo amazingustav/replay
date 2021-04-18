@@ -2,8 +2,11 @@ package br.com.amz.replay.loan.dbo
 
 import br.com.amz.replay.loan.model.Loan
 import br.com.amz.replay.offer.dbo.OfferDBO
+import br.com.amz.replay.offer.dbo.toDBO
 import br.com.amz.replay.user.dbo.UserDBO
+import br.com.amz.replay.user.dbo.toDBO
 import br.com.amz.replay.vehicle.dbo.VehicleDBO
+import br.com.amz.replay.vehicle.dbo.toDBO
 import io.micronaut.data.annotation.DateCreated
 import io.micronaut.data.annotation.DateUpdated
 import io.micronaut.data.annotation.MappedEntity
@@ -36,3 +39,13 @@ data class LoanDBO(
         balance = balance
     )
 }
+
+internal fun Loan.toDBO() = LoanDBO(
+    id = id,
+    vehicle = vehicle.toDBO(),
+    user = user.toDBO(),
+    offer = offer.toDBO(),
+    lenderName = lenderName,
+    paidAmount = paidAmount,
+    balance = balance
+)

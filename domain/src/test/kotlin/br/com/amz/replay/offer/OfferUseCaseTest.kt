@@ -1,8 +1,10 @@
-package br.com.amz.replay.offer.usecase
+package br.com.amz.replay.offer
 
+import br.com.amz.replay.exception.ResourceNotFoundException
 import br.com.amz.replay.loan.ports.output.LoanDataAccessPort
 import br.com.amz.replay.offer.model.Offer
 import br.com.amz.replay.offer.ports.output.OfferDataAccessPort
+import br.com.amz.replay.offer.usecase.OfferUseCase
 import br.com.amz.replay.util.createMockLoan
 import io.mockk.coEvery
 import io.mockk.impl.annotations.InjectMockKs
@@ -10,7 +12,10 @@ import io.mockk.impl.annotations.MockK
 import io.mockk.junit5.MockKExtension
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runBlockingTest
+import org.junit.jupiter.api.Assertions
+import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.assertThrows
 import org.junit.jupiter.api.extension.ExtendWith
 import java.math.BigDecimal
 import java.util.UUID
@@ -24,19 +29,29 @@ class OfferUseCaseTest {
     @MockK private lateinit var loanDataAccessPort: LoanDataAccessPort
 
     @Test
+    fun `should throw exception due to invalid loanId when generate offer`() = runBlockingTest {
+        // Given
+        coEvery { loanDataAccessPort.findById(any()) } returns null
+
+        // Then
+        assertThrows<ResourceNotFoundException> {
+            // When
+            offerUseCase.generateProposalOffers(UUID.randomUUID())
+        }
+    }
+
+    @Test
     fun `should return 3 proposal offers with different time remaining when generate offer`() = runBlockingTest {
         // Given
         val loan = createMockLoan()
 
-        coEvery {
-            loanDataAccessPort.findById(eq(loan.id))
-        } returns loan
+        coEvery { loanDataAccessPort.findById(eq(loan.id)) } returns loan
 
         // When
         val proposalOffers = offerUseCase.generateProposalOffers(loan.id)
 
         // Then
-        assert(proposalOffers.size == 3)
+        assertEquals(3, proposalOffers.size)
         assert(proposalOffers.any { it.timeRemaining == 60 } )
         assert(proposalOffers.any { it.timeRemaining == 72 } )
         assert(proposalOffers.any { it.timeRemaining == 84 } )
@@ -47,9 +62,7 @@ class OfferUseCaseTest {
         // Given
         val loan = createMockLoan()
 
-        coEvery {
-            loanDataAccessPort.findById(eq(loan.id))
-        } returns loan
+        coEvery { loanDataAccessPort.findById(eq(loan.id)) } returns loan
 
         // When
         val proposalOffers = offerUseCase.generateProposalOffers(loan.id)
@@ -71,9 +84,7 @@ class OfferUseCaseTest {
 
         val loan = createMockLoan(offer)
 
-        coEvery {
-            loanDataAccessPort.findById(eq(loan.id))
-        } returns loan
+        coEvery { loanDataAccessPort.findById(eq(loan.id)) } returns loan
 
         // When
         val proposalOffers = offerUseCase.generateProposalOffers(loan.id)
@@ -83,8 +94,8 @@ class OfferUseCaseTest {
         val offer84months = proposalOffers.first { it.timeRemaining == 84 }
 
         // Then
-        assert(offer60months.monthlyPayment == 183.04.toBigDecimal())
-        assert(offer72months.monthlyPayment == 155.32.toBigDecimal())
-        assert(offer84months.monthlyPayment == 135.54.toBigDecimal())
+        assertEquals(183.04.toBigDecimal(), offer60months.monthlyPayment)
+        assertEquals(155.32.toBigDecimal(), offer72months.monthlyPayment)
+        assertEquals(135.54.toBigDecimal(), offer84months.monthlyPayment)
     }
 }

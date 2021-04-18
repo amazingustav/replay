@@ -15,3 +15,8 @@ data class Loan(
     val paidAmount: Int,
     val balance: BigDecimal
 )
+
+data class OfferSubmissionResult(
+    val title: String,
+    val message: String
+)
