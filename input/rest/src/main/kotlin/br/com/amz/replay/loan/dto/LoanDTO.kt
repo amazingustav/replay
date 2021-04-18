@@ -7,6 +7,7 @@ import br.com.amz.replay.user.dto.UserDTO
 import br.com.amz.replay.user.dto.toDTO
 import br.com.amz.replay.vehicle.dto.VehicleDTO
 import br.com.amz.replay.vehicle.dto.toDTO
+import java.math.BigDecimal
 import java.util.UUID
 
 data class LoanDTO (
@@ -16,7 +17,7 @@ data class LoanDTO (
     val offer: OfferDTO,
     val lenderName: String,
     val paidAmount: Int,
-    val balance: Double
+    val balance: BigDecimal
 )
 
 fun Loan.toDTO() = LoanDTO(

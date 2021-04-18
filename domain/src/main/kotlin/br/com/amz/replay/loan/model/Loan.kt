@@ -3,6 +3,7 @@ package br.com.amz.replay.loan.model
 import br.com.amz.replay.offer.model.Offer
 import br.com.amz.replay.user.model.User
 import br.com.amz.replay.vehicle.model.Vehicle
+import java.math.BigDecimal
 import java.util.UUID
 
 data class Loan(
@@ -12,5 +13,5 @@ data class Loan(
     val user: User,
     val lenderName: String,
     val paidAmount: Int,
-    val balance: Double
+    val balance: BigDecimal
 )

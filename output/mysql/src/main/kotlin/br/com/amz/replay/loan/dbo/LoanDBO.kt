@@ -7,6 +7,7 @@ import br.com.amz.replay.vehicle.dbo.VehicleDBO
 import io.micronaut.data.annotation.DateCreated
 import io.micronaut.data.annotation.DateUpdated
 import io.micronaut.data.annotation.MappedEntity
+import java.math.BigDecimal
 import java.time.Instant
 import java.util.UUID
 import javax.persistence.Id
@@ -21,7 +22,7 @@ data class LoanDBO(
     @OneToOne val offer: OfferDBO,
     val lenderName: String,
     val paidAmount: Int,
-    val balance: Double,
+    val balance: BigDecimal,
     @DateCreated var createdAt: Instant = Instant.now(),
     @DateUpdated var modifiedAt: Instant? = null
 ) {

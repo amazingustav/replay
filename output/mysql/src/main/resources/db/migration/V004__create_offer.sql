@@ -1,7 +1,7 @@
 CREATE TABLE offer (
     id VARCHAR(36) PRIMARY KEY,
     monthly_payment_amount DECIMAL(10, 2) NOT NULL,
-    annual_percentage_rate DECIMAL(10, 2) NOT NULL,
+    annual_percentage_rate DOUBLE(5, 2) NOT NULL,
     payment_amount INTEGER NOT NULL,
     created_at DATETIME NOT NULL,
     modified_at DATETIME

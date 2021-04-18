@@ -4,6 +4,7 @@ import br.com.amz.replay.offer.model.Offer
 import io.micronaut.data.annotation.DateCreated
 import io.micronaut.data.annotation.DateUpdated
 import io.micronaut.data.annotation.MappedEntity
+import java.math.BigDecimal
 import java.time.Instant
 import java.util.UUID
 import javax.persistence.Id
@@ -11,7 +12,7 @@ import javax.persistence.Id
 @MappedEntity("offer")
 data class OfferDBO(
     @Id val id: UUID = UUID.randomUUID(),
-    val monthlyPaymentAmount: Double,
+    val monthlyPaymentAmount: BigDecimal,
     val annualPercentageRate: Double,
     val paymentAmount: Int,
     @DateCreated val createdAt: Instant = Instant.now(),
