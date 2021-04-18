@@ -1,12 +1,12 @@
-import org.jetbrains.kotlin.gradle.dsl.Coroutines
-
 val kotlinVersion = project.properties["kotlinVersion"]
 val micronautVersion = project.properties["micronautVersion"]
 
 plugins {
-    kotlin("jvm") version "1.4.30"
-    kotlin("kapt") version "1.4.30"
-    id("org.jetbrains.kotlin.plugin.allopen") version "1.4.30"
+    val pluginKotlinVersion = "1.4.30"
+
+    kotlin("jvm") version pluginKotlinVersion
+    kotlin("kapt") version pluginKotlinVersion
+    id("org.jetbrains.kotlin.plugin.allopen") version pluginKotlinVersion
 }
 
 allprojects {
@@ -25,10 +25,14 @@ allprojects {
     }
 
     dependencies {
-        kapt("io.micronaut:micronaut-bom:${micronautVersion}")
+        kapt("io.micronaut:micronaut-bom:$micronautVersion")
         kapt("io.micronaut.data:micronaut-data-processor")
         kapt("io.micronaut:micronaut-validation")
         kapt("io.micronaut:micronaut-inject-java")
+    }
+
+    kapt {
+        correctErrorTypes = true
     }
 }
 
@@ -36,29 +40,21 @@ subprojects {
     group = "br.com.amz"
     version = "0.1"
 
-    sourceSets {
-        getByName("main").java.srcDirs("src/main/kotlin")
-    }
-
-    sourceSets.main {
-        java.srcDir("src/main/kotlin")
-    }
-
     repositories {
         mavenCentral()
         maven("https://s01.oss.sonatype.org/content/repositories/snapshots/")
     }
 
     dependencies {
-        kapt("io.micronaut:micronaut-bom:${micronautVersion}")
+        kapt("io.micronaut:micronaut-bom:$micronautVersion")
         kapt("io.micronaut.data:micronaut-data-processor")
         kapt("io.micronaut:micronaut-validation")
         kapt("io.micronaut:micronaut-inject-java")
 
-        implementation(platform("io.micronaut:micronaut-bom:${micronautVersion}"))
+        implementation(platform("io.micronaut:micronaut-bom:$micronautVersion"))
 
         implementation("org.jetbrains.kotlin:kotlin-reflect")
-        implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
+        implementation("org.jetbrains.kotlin:kotlin-stdlib")
         implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core")
         implementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactor")
         implementation("io.projectreactor.kotlin:reactor-kotlin-extensions:1.0.2.RELEASE")
@@ -74,17 +70,14 @@ subprojects {
         runtimeOnly("ch.qos.logback:logback-classic")
         runtimeOnly("com.fasterxml.jackson.module:jackson-module-kotlin")
 
-        kaptTest("io.micronaut:micronaut-bom:${micronautVersion}")
-        kaptTest("io.micronaut:micronaut-inject-java")
+        // JUnit and Test context
+        testAnnotationProcessor("io.micronaut:micronaut-inject-java")
+        testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.4.3")
+        testImplementation("org.junit.jupiter:junit-jupiter-api")
+        testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.7.1")
 
-        testImplementation("io.micronaut.test:micronaut-test-kotest")
-        testImplementation("io.mockk:mockk:1.10.5")
-        testImplementation("io.kotest:kotest-runner-junit5-jvm:4.3.0")
-        testImplementation(platform("io.micronaut:micronaut-bom:${micronautVersion}"))
-    }
-
-    java {
-        sourceCompatibility = JavaVersion.toVersion("11")
+        testImplementation("io.mockk:mockk:1.11.0")
+        testImplementation("io.micronaut.test:micronaut-test-junit5:2.3.4-SNAPSHOT")
     }
 
     tasks {
@@ -93,14 +86,30 @@ subprojects {
         }
 
         compileKotlin {
+            sourceCompatibility = JavaVersion.VERSION_11.name
+            targetCompatibility = JavaVersion.VERSION_11.name
+
+            kotlinOptions {
+                freeCompilerArgs = listOf("-Xjvm-default=enable")
+                allWarningsAsErrors = true
+                jvmTarget = "11"
+            }
+        }
+
+        compileKotlin {
             kotlinOptions {
                 jvmTarget = "11"
             }
         }
+
         compileTestKotlin {
             kotlinOptions {
                 jvmTarget = "11"
             }
+        }
+
+        sourceSets {
+            getByName("main").java.srcDirs("src/main/kotlin")
         }
     }
 }

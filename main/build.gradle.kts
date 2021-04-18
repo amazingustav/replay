@@ -6,7 +6,7 @@ plugins {
 kapt {
     arguments {
         arg("micronaut.processing.incremental", true)
-        arg("micronaut.processing.annotations", "br.com.amz.*,io.amz.*")
+        arg("micronaut.processing.annotations", "br.com.amz.*,io.*")
     }
 }
 
@@ -24,7 +24,6 @@ application {
 micronaut {
     version("2.4.2-SNAPSHOT")
     runtime("netty")
-    testRuntime("kotest")
 
     processing {
         incremental(true)
@@ -60,10 +59,5 @@ val projects = listOf(":domain") + inputProjects + outputProjects
 dependencies {
     projects.map { project(it) }.forEach { implementation(it) }
 
-    kapt("io.micronaut:micronaut-bom:${micronautVersion}")
-    implementation(platform("io.micronaut:micronaut-bom:${micronautVersion}"))
-
     implementation("io.micronaut:micronaut-runtime")
-
-    kaptTest("io.micronaut:micronaut-bom:${micronautVersion}")
 }
