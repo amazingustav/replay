@@ -1,6 +1,6 @@
 applicationType: default
 defaultPackage: br.com.amz.replay
-testFramework: kotest
+testFramework: junit
 sourceLanguage: kotlin
 buildTool: gradle_kotlin
-features: [annotation-api, app-name, data, data-r2dbc, flyway, gradle, h2, http-client, kotest, kotlin, kotlin-application, kotlin-extension-functions, logback, netty-server, r2dbc, readme, shade, testcontainers, yaml]
+features: [annotation-api, app-name, data, data-r2dbc, flyway, gradle, http-client, kotest, kotlin, kotlin-application, kotlin-extension-functions, logback, netty-server, r2dbc, readme, yaml]
