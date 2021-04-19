@@ -1,0 +1,17 @@
+version: '3'
+
+volumes:
+  user-data:
+
+services:
+  database:
+    image: mysql:8.0
+    restart: always
+    container_name: replay-database
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: replay
+      MYSQL_USER: r_user
+      MYSQL_PASSWORD: r_pwd
+    ports:
+      - "3311:3306"
