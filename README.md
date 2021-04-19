@@ -32,7 +32,8 @@ This project was built in order to present as a tech test to WithClutch for the 
 
 - ### **Requirements**
 
-    - Make sure you have **[Docker](https://docs.docker.com/engine/install/)** and **[Docker Compose](https://docs.docker.com/compose/install/)** installed into your machine
+    - Make sure you have **[Docker Compose](https://docs.docker.com/compose/install/)** installed into your machine (you can run `docker-compose -v` to check)
+    - Make sure you have **[Java](https://docs.jboss.org/jbossas/docs/Installation_Guide/4/html/Pre_Requisites-Configuring_Your_Java_Environment.html)** installed and configured into your machine (you can run `java -version` to check)
     - You must have connection internet to download all libraries (but I'm sure you have because you are reading this on GitHub)
 
 1. Clone this repo:
@@ -41,27 +42,27 @@ This project was built in order to present as a tech test to WithClutch for the 
   $ git clone https://github.com/amazingustav/replay-micronaut.git
 ```
 
-2. Prepare application:
+2. Build and run database container:
 
 ```sh
   $ cd path/to/replay-micronaut
   
-  # Build docker compose to use database
-  $ cd platform/docker && docker-compose up && cd ../../
+  $ make database
   
-  # Build application
-  $ ./gradlew clean build
-
-  # Execute database migrations (to provide some data to all tables)
-  $ ./gradlew flywayBaseline flywayMigrate
+  # Wait in console for an output like (then you can open another terminal window and go to the next steps):
+  # [Server] /usr/sbin/mysqld: ready for connections
 ```
 
 3. Run the application (it will be available on http://localhost:8087)
 ```sh
-  $ ./gradlew run
+  $ make up
 ```
 
 4. (Optional) If you wish to execute only test, run:
 ```sh
-  $ ./gradlew clean test
+  $ make test-app
 ```
+
+## Service Architecture
+
+This application was built following the [Hexagonal Architecture](https://alistair.cockburn.us/hexagonal-architecture/) rules.
