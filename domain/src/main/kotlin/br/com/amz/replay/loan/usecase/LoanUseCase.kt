@@ -26,15 +26,7 @@ class LoanUseCase(
         val loan = loanDataAccessPort.findById(loanId)
             ?: throw ResourceNotFoundException("Loan not found while submit offer")
 
-        Loan(
-            id = loan.id,
-            balance = loan.balance,
-            lenderName = loan.lenderName,
-            paidAmount = 0,
-            vehicle = loan.vehicle,
-            user = loan.user,
-            offer = offerSubmitted
-        ).also {
+        loan.copy(offer = offerSubmitted).also {
             loanDataAccessPort.update(it)
         }
 

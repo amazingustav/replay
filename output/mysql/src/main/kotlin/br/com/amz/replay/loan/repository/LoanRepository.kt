@@ -2,6 +2,7 @@ package br.com.amz.replay.loan.repository
 
 import br.com.amz.replay.loan.dbo.LoanDBO
 import io.micronaut.data.annotation.Join
+import io.micronaut.data.annotation.Query
 import io.micronaut.data.annotation.repeatable.JoinSpecifications
 import io.micronaut.data.model.query.builder.sql.Dialect
 import io.micronaut.data.r2dbc.annotation.R2dbcRepository
@@ -33,4 +34,7 @@ interface LoanRepository: ReactorCrudRepository<LoanDBO, UUID> {
         Join("offer")
     )
     fun findByUserId(userId: UUID): Flux<LoanDBO>
+
+    @Query(nativeQuery = true, value = "UPDATE loan l set l.offer_id = :offerId where l.id = :loanId")
+    fun updateOffer(offerId: UUID, loanId: UUID)
 }

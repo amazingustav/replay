@@ -39,3 +39,4 @@ internal fun createMockVehicle() = Vehicle(
     year = 1999,
     milesAmount = 230_000
 )
+

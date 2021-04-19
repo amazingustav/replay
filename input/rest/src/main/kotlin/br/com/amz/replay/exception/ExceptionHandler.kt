@@ -25,7 +25,10 @@ class ExceptionHandler(
         exception: RuntimeException
     ): HttpResponse<Any> = when (exception) {
         is ResourceNotFoundException -> handleResourceNotFoundException(request, exception)
-        else -> serverError()
+        else -> {
+            exception.printStackTrace()
+            serverError()
+        }
     }
 
     private fun handleResourceNotFoundException(
@@ -36,6 +39,6 @@ class ExceptionHandler(
             .cause(exception)
             .errorMessage(exception.message ?: "Resource not found")
             .build(),
-        HttpResponse.notFound<Any>()
+        HttpResponse.badRequest<Any>()
     )
 }
