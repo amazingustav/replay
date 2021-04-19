@@ -22,8 +22,5 @@ jobs:
       - name: Build application
         run: ./gradlew clean build
       
-      - name: Validate migrations
-        run: ./gradlew flywayValidate
-      
       - name: Run unit tests
         run: ./gradlew test
