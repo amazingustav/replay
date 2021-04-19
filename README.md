@@ -1,31 +1,67 @@
-## Micronaut 2.4.2-SNAPSHOT Documentation
+<h1 align="center">
+    <br>Replay<br/>
+    Kotlin | Micronaut | Coroutines
+</h1>
 
-- [User Guide](https://docs.micronaut.io/snapshot/guide/index.html)
-- [API Reference](https://docs.micronaut.io/snapshot/api/index.html)
-- [Configuration Reference](https://docs.micronaut.io/snapshot/guide/configurationreference.html)
-- [Micronaut Guides](https://guides.micronaut.io/index.html)
----
+<p align="center">
+  <a href="https://app.getpostman.com/run-collection/60e00c7d4143fc4bcb1b" target="_blank"><img src="https://run.pstmn.io/button.svg" alt="Run in Postman"></a>
+</p>
+<p align="center">
+  <a href="#about">About</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <a href="#stack">Stack</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <a href="#how-to-run">How to run</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <a href="#how-to-run">Which APIs it has?</a>
+</p>
 
-## Feature flyway documentation
+## About
 
-- [Micronaut Flyway Database Migration documentation](https://micronaut-projects.github.io/micronaut-flyway/latest/guide/index.html)
+Replay is an application responsible to refinance auto loans, helping people to get te best taxes and submit their offer instantly.
 
-- [https://flywaydb.org/](https://flywaydb.org/)
+This project was built in order to present as a tech test to WithClutch for the Software Engineer hole
 
-## Feature data-r2dbc documentation
+## Stack
 
-- [Micronaut Data R2DBC documentation](https://micronaut-projects.github.io/micronaut-r2dbc/latest/guide/)
+-  [Kotlin](https://kotlinlang.org/)
+-  [Micronaut](https://micronaut.io/)
+-  [Coroutines](https://kotlinlang.org/docs/coroutines-overview.html)
+-  [R2DBC](https://r2dbc.io/)
+-  [JUnit](https://junit.org/junit5/)
+-  [Mockk](https://mockk.io/)
 
-- [https://r2dbc.io](https://r2dbc.io)
+## How to Run
 
-## Feature http-client documentation
+- ### **Requirements**
 
-- [Micronaut HTTP Client documentation](https://docs.micronaut.io/latest/guide/index.html#httpClient)
+    - Make sure you have **[Docker](https://docs.docker.com/engine/install/)** and **[Docker Compose](https://docs.docker.com/compose/install/)** installed into your machine
+    - You must have connection internet to download all libraries (but I'm sure you have because you are reading this on GitHub)
 
-## Feature r2dbc documentation
+1. Clone this repo:
 
-- [Micronaut R2DBC documentation](https://micronaut-projects.github.io/micronaut-r2dbc/latest/guide/)
+```sh
+  $ git clone https://github.com/amazingustav/replay-micronaut.git
+```
 
-- [https://r2dbc.io](https://r2dbc.io)
+2. Prepare application:
 
-# replay-micronaut
+```sh
+  $ cd path/to/replay-micronaut
+  
+  # Build docker compose to use database
+  $ cd platform/docker && docker-compose up && cd ../../
+  
+  # Build application
+  $ ./gradlew clean build
+
+  # Execute database migrations (to provide some data to all tables)
+  $ ./gradlew flywayBaseline flywayMigrate
+```
+
+3. Run the application (it will be available on http://localhost:8087)
+```sh
+  $ ./gradlew run
+```
+
+4. (Optional) If you wish to execute only test, run:
+```sh
+  $ ./gradlew clean test
+```
