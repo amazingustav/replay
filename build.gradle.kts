@@ -71,7 +71,7 @@ subprojects {
         runtimeOnly("com.fasterxml.jackson.module:jackson-module-kotlin")
 
         // JUnit and Test context
-        testAnnotationProcessor("io.micronaut:micronaut-inject-java")
+        kaptTest("io.micronaut:micronaut-inject-java")
         testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.4.3")
         testImplementation("org.junit.jupiter:junit-jupiter-api")
         testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.7.1")
