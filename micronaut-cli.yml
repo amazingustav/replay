@@ -3,4 +3,4 @@ defaultPackage: br.com.amz.replay
 testFramework: junit
 sourceLanguage: kotlin
 buildTool: gradle_kotlin
-features: [annotation-api, app-name, data, data-r2dbc, flyway, gradle, http-client, kotest, kotlin, kotlin-application, kotlin-extension-functions, logback, netty-server, r2dbc, readme, yaml]
+features: [annotation-api, app-name, data, data-r2dbc, flyway, gradle, http-client, junit, kotlin, kotlin-application, kotlin-extension-functions, logback, netty-server, r2dbc, readme, yaml]

@@ -25,8 +25,3 @@ data class UserDBO(
 
     override fun hashCode(): Int = id.hashCode()
 }
-
-internal fun User.toDBO() = UserDBO(
-    id = id,
-    name = name
-)
