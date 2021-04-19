@@ -25,6 +25,10 @@ data class VehicleDBO(
         year = year,
         milesAmount = milesAmount
     )
+
+    override fun equals(other: Any?) = this === other || (other is VehicleDBO && id == other.id)
+
+    override fun hashCode(): Int = id.hashCode()
 }
 
 internal fun Vehicle.toDBO() = VehicleDBO(

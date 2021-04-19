@@ -1,8 +1,6 @@
 package br.com.amz.replay.offer.dbo
 
 import br.com.amz.replay.offer.model.Offer
-import br.com.amz.replay.vehicle.dbo.VehicleDBO
-import br.com.amz.replay.vehicle.model.Vehicle
 import io.micronaut.data.annotation.DateCreated
 import io.micronaut.data.annotation.DateUpdated
 import io.micronaut.data.annotation.MappedEntity
@@ -26,6 +24,10 @@ data class OfferDBO(
         annualPercentageRate = annualPercentageRate,
         paymentAmount = paymentAmount,
     )
+
+    override fun equals(other: Any?) = this === other || (other is OfferDBO && id == other.id)
+
+    override fun hashCode(): Int = id.hashCode()
 }
 
 internal fun Offer.toDBO() = OfferDBO(

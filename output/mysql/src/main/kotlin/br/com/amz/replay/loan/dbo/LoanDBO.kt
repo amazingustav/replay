@@ -38,6 +38,10 @@ data class LoanDBO(
         paidAmount = paidAmount,
         balance = balance
     )
+
+    override fun equals(other: Any?) = this === other || (other is LoanDBO && id == other.id)
+
+    override fun hashCode(): Int = id.hashCode()
 }
 
 internal fun Loan.toDBO() = LoanDBO(

@@ -20,6 +20,10 @@ data class UserDBO(
         id = id,
         name = name
     )
+
+    override fun equals(other: Any?) = this === other || (other is UserDBO && id == other.id)
+
+    override fun hashCode(): Int = id.hashCode()
 }
 
 internal fun User.toDBO() = UserDBO(
