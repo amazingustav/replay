@@ -15,9 +15,3 @@ services:
       MYSQL_PASSWORD: r_pwd
     ports:
       - "3311:3306"
-  api:
-    container_name: replay-api
-    build: .
-    depends_on:
-      - database
-    network_mode: host
