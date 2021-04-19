@@ -33,7 +33,7 @@ This project was built in order to present as a tech test to WithClutch for the 
 - ### **Requirements**
 
     - Make sure you have **[Docker Compose](https://docs.docker.com/compose/install/)** installed into your machine (you can run `docker-compose -v` to check)
-    - Make sure you have **[Java](https://docs.jboss.org/jbossas/docs/Installation_Guide/4/html/Pre_Requisites-Configuring_Your_Java_Environment.html)** installed and configured into your machine (you can run `java -version` to check)
+    - Make sure you have **[Java JDK 11](https://docs.jboss.org/jbossas/docs/Installation_Guide/4/html/Pre_Requisites-Configuring_Your_Java_Environment.html)** installed and configured into your machine (you can run `java -version` to check)
     - You must have connection internet to download all libraries (but I'm sure you have because you are reading this on GitHub)
 
 1. Clone this repo:
