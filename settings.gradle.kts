@@ -1,4 +1,4 @@
-rootProject.name="replay-micronaut"
+rootProject.name="replay"
 
 include("main", "domain")
 

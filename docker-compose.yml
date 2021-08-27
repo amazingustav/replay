@@ -7,7 +7,7 @@ services:
   database:
     image: mysql:8.0
     restart: always
-    container_name: replay-database
+    container_name: replaydb
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: replay

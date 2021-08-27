@@ -33,7 +33,7 @@ micronaut {
 
 tasks {
     jar {
-        archiveBaseName.set("replay-micronaut")
+        archiveBaseName.set("replay")
         archiveVersion.set("")
 
         manifest {

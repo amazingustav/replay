@@ -39,13 +39,13 @@ This project was built in order to present as a tech test to WithClutch for the 
 1. Clone this repo:
 
 ```sh
-  $ git clone https://github.com/amazingustav/replay-micronaut.git
+  $ git clone https://github.com/amazingustav/replay.git
 ```
 
 2. Build and run database container:
 
 ```sh
-  $ cd replay-micronaut
+  $ cd replay
   
   $ make database
   
